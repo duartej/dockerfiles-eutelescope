@@ -1,0 +1,82 @@
+version: "3.2"
+
+services:
+    eutelescope:
+        build: .
+        image: duartej/eutelescope:latest
+    
+    runControl:
+        image: duartej/eutelescope:latest
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        depends_on:
+            - "eutelescope"
+        networks:
+            default:
+                ipv4_address: 172.20.128.2
+        entrypoint: 
+            - initialize_service.sh
+            - runControl
+    
+    logger:
+        image: duartej/eutelescope:latest
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - type: bind
+              source: @LOGSDIR
+              target: /logs
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        depends_on:
+            - "runControl"
+        networks:
+            default:
+                ipv4_address: 172.20.128.3
+        entrypoint: 
+            - initialize_service.sh
+            - logger
+
+    dataCollector:
+        image: duartej/eutelescope:latest
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - type: bind
+              source: @DATADIR
+              target: /data
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        depends_on:
+            - "runControl"
+            - "logger"
+        networks:
+            default:
+                ipv4_address: 172.20.128.4
+        entrypoint: 
+            - initialize_service.sh
+            - dataCollector
+
+    onlineMon:
+        image: duartej/eutelescope:latest
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - type: bind
+              source: @DATADIR
+              target: /data
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        depends_on:
+            - "runControl"
+            - "logger"
+        networks:
+            default:
+                ipv4_address: 172.20.128.5
+        entrypoint: 
+            - initialize_service.sh
+            - onlineMon
+
+networks:
+    default:
+        external:
+            name: @NETWORKNAME
