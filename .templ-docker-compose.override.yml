@@ -11,7 +11,7 @@ services:
                      && mkdir -p /eudaq/eudaq/build \
                      && cd /eudaq/eudaq/build \
                      && rm -rf * \ 
-                     && cmake .. -DBUILD_tlu=ON -DBUILD_python=ON -DBUILD_ni=ON -DUSE_LCIO=ON -DBUILD_nreader=ON -DBUILD_cmspixel=ON \
+                     && cmake .. -DBUILD_tlu=ON -DBUILD_python=ON -DBUILD_ni=ON -DUSE_LCIO=ON -DBUILD_nreader=ON \
                      && make -j4 install'"
     
     devcode:
