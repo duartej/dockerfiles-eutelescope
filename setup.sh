@@ -55,7 +55,7 @@ then
     echo "DO NOT DOING ANYTHING, THE SETUP WAS ALREADY DONE:"
     echo "=================================================="
     cat .setupdone
-    #exit -3
+    exit -3
 fi
 
 
