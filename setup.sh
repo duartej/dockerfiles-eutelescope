@@ -70,9 +70,13 @@ NETWORKNAME_PRE=$(python -c "with open('${PARSEFILE}') \
     as f: l=f.readlines(); line=filter(lambda (i,x): \
     i and x.find('network') != -1,enumerate(l))[0][0]+1; \
     print l[line].replace(':','').strip()")
-NETWORKNAME=$(python -c "import docker; cl=docker.from_env(); \
-    print filter(lambda xn: xn.find('${NETWORKNAME_PRE}') != -1, \
-    map(lambda x: x.name, cl.networks.list()))[0]")
+# docker python it could not be installed...
+#NETWORKNAME=$(python -c "import docker; cl=docker.from_env(); \
+#    print filter(lambda xn: xn.find('${NETWORKNAME_PRE}') != -1, \
+#    map(lambda x: x.name, cl.networks.list()))[0]")
+out_dn=$(docker network ls)
+NETWORKNAME=$(python -c "dnout=\"\"\"${out_dn}\"\"\".split(); \
+    print filter(lambda xn: xn.find('${NETWORKNAME_PRE}') != -1, dnout)[0]")
 # FIXME Be sure that the docker container for eudaqv1 was called at 
 # least once in order to create the network, check variable
 # $? If 1 then create a dummy container now
