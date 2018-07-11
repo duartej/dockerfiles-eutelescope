@@ -55,23 +55,27 @@ then
     echo "DO NOT DOING ANYTHING, THE SETUP WAS ALREADY DONE:"
     echo "=================================================="
     cat .setupdone
-    exit -3
+    #exit -3
 fi
 
 
 # 3. Extract some info of the EUDAQ container (assuming python installed!)
-EFOLDER=$(basename $1|sed 's/-//g')
 PARSEFILE=$1/docker-compose.override.yml
 # -- get the path where it was installed the EUDAQ source code
 EUDAQCODE=$(python -c "with open('${PARSEFILE}') \
     as f: l=f.readlines(); print filter(lambda x: \
     x.find('source') != -1,l)[0].replace('source:','').strip()")
 # --get the name of the create network
-NETWORKNAME=${EFOLDER}_$(python -c "with open('${PARSEFILE}') \
+NETWORKNAME_PRE=$(python -c "with open('${PARSEFILE}') \
     as f: l=f.readlines(); line=filter(lambda (i,x): \
     i and x.find('network') != -1,enumerate(l))[0][0]+1; \
     print l[line].replace(':','').strip()")
-
+NETWORKNAME=$(python -c "import docker; cl=docker.from_env(); \
+    print filter(lambda xn: xn.find('${NETWORKNAME_PRE}') != -1, \
+    map(lambda x: x.name, cl.networks.list()))[0]")
+# FIXME Be sure that the docker container for eudaqv1 was called at 
+# least once in order to create the network, check variable
+# $? If 1 then create a dummy container now
 DOCKERDIR=${PWD}
 
 # 3. Fill the place-holders of the .templ-docker-compose.yml 
