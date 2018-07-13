@@ -64,4 +64,5 @@ RUN . ${ILCSOFT}/v01-19-02/Eutelescope/master/build_env.sh \
 
 USER eudaquser
 
-ENTRYPOINT . ${ILCSOFT}/v01-19-02/Eutelescope/master/build_env.sh && /bin/bash -i
+ENTRYPOINT ACTIVE_PROC=${MARLIN_DLL} && . ${ILCSOFT}/v01-19-02/Eutelescope/master/build_env.sh \ 
+    && export MARLIN_DLL=${ACTIVE_PROC} && /bin/bash -i
