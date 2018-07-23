@@ -8,8 +8,8 @@
 
 FROM duartej/eudaqv1-ubuntu:latest
 LABEL author="jorge.duarte.campderros@cern.ch" \ 
-    version="0.1-alpha" \ 
-    description="Docker image for EUTelescope framework"
+    version="1.0-v01-19-02" \ 
+    description="Docker image for EUTelescope framework (link with ilcinstall version)"
 
 # Place at the directory
 USER root
