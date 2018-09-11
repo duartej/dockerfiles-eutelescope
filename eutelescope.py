@@ -33,7 +33,11 @@ class Eutelescope(MarlinPKG):
         #self.download.svnurl = 'https://github.com/eutelescope/eutelescope/'+userInput
 
         self.download.supportedTypes = [ "GitHub" ] 
-        self.download.gituser = 'eutelescope'
+        # [JDC] Using duartej repo, includes last patches regarding
+        # RD53A definition and ntuples
+        #self.download.gituser = 'eutelescope'
+        #self.download.gitrepo = 'eutelescope'
+        self.download.gituser = 'duartej'
         self.download.gitrepo = 'eutelescope'
 
 
@@ -59,11 +63,13 @@ class Eutelescope(MarlinPKG):
         os.chdir( self.installPath+"/build" )
         
         # PROVISONAL: includes kRD53A type
-        for line in fileinput.input("/eudaq/ilcsoft/v01-19-02/Eutelescope/master/eutelescope/libraries/include/EUTELESCOPE.h",inplace=True):
-            if line.find("kCMSPixel = 108") != -1:
-                line = "    kCMSPixel = 108, kRD53A = 109\n"
-            print line,
+        # [XXX] NOT NEEDED ANYMORE,  TO BE DEPRECATED
+        #for line in fileinput.input("/eudaq/ilcsoft/v01-19-02/Eutelescope/master/eutelescope/libraries/include/EUTELESCOPE.h",inplace=True):
+        #    if line.find("kCMSPixel = 108") != -1:
+        #        line = "    kCMSPixel = 108, kRD53A = 109\n"
+        #    print line,
         # PROVISONAL: includes kRD53A type
+        # [XXX] END NOT NEEDED ANYMORE,  TO BE DEPRECATED
         if( self.rebuild ):
             tryunlink( "CMakeCache.txt" )
 
