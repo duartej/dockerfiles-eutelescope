@@ -38,6 +38,7 @@ ENV GEAR ${ILCOSFT}/v01-19-02/gear/v01-06-eutel-pre
 ENV MARLIN ${ILCSOFT}/v01-19-02/Marlin/v01-11
 ENV MARLIN_DLL ${EUTELESCOPE}/lib/libEutelescope.so:${EUTELESCOPE}/lib/libEutelProcessors.so:${EUTELESCOPE}/lib/libEutelReaders.so:${EUDAQ}/lib/libNativeReader.so
 ENV GBL ${ILCSOFT}/v01-19-02/GBL/V02-01-03
+ENV ILCUTIL_DIR ${ILCSOFT}/v01-19-02/ilcutil/v01-02-01 
 ENV PATH="${PATH}:${MARLIN}/bin:${MILLEPEDEII}:${EUTELESCOPE}/bin:${GEAR}/tools:${GEAR}/bin:${PXARPATH}/bin"
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${EUTELESCOPE}/lib:${GEAR}/lib:${GBL}/lib:${PXARPATH}/lib"
 
