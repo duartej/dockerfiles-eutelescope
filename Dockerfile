@@ -34,7 +34,7 @@ ENV EUDAQ /eudaq/eudaq
 ENV ILCSOFT_CMAKE_ENV ${ILCSOFT}/v01-19-02/ILCSoft.cmake.env.sh
 ENV MILLEPEDEII ${ILCSOFT}/v01-19-02/Eutelescope/master/external/millepede2/tags/V04-03-09
 ENV MILLEPEDEII_VERSION tags/V04-03-09
-ENV GEAR ${ILCOSFT}/v01-19-02/gear/v01-06-eutel-pre
+ENV GEAR ${ILCSOFT}/v01-19-02/gear/v01-06-eutel-pre
 ENV MARLIN ${ILCSOFT}/v01-19-02/Marlin/v01-11
 ENV MARLIN_DLL ${EUTELESCOPE}/lib/libEutelescope.so:${EUTELESCOPE}/lib/libEutelProcessors.so:${EUTELESCOPE}/lib/libEutelReaders.so:${EUDAQ}/lib/libNativeReader.so
 ENV GBL ${ILCSOFT}/v01-19-02/GBL/V02-01-03
