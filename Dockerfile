@@ -6,7 +6,7 @@
 # duartej/eudaqv1-ubuntu image
 #
 
-FROM duartej/eudaqv1-ubuntu:latest
+FROM duartej/eudaqv1:latest
 LABEL author="jorge.duarte.campderros@cern.ch" \ 
     version="1.0-v01-19-02" \ 
     description="Docker image for EUTelescope framework (link with ilcinstall version)"
@@ -25,6 +25,7 @@ RUN apt-get update && apt-get -y install \
   libx11-dev \ 
   libxext-dev \
   subversion \ 
+  python \
   && rm -rf /var/lib/apt/lists/*
 
 # ILCSOFT (for EUTelescope) and LCIO ===================
@@ -56,6 +57,10 @@ RUN mkdir -p ${ILCSOFT} \
   #  XXX -- END PROVISIONAL UNTIL EUTelescope includes new kRD53A
   && ${ILCSOFT}/ilcinstall/ilcsoft-install -i -v ${ILCSOFT}/release-standalone-tuned.cfg 
 # ILCSOFT (for EUTelescope) and LCIO: DONE ===================
+
+# Remove python2
+RUN apt-get update && apt-get -y remove python \
+  && rm -rf /var/lib/apt/lists/*
 
 # Recompile eudaq with lcio and eutelescope
 RUN . ${ILCSOFT}/v01-19-02/Eutelescope/master/build_env.sh \
