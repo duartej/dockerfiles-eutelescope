@@ -8,7 +8,7 @@
 
 FROM duartej/eudaqv1:latest
 LABEL author="jorge.duarte.campderros@cern.ch" \ 
-    version="1.0-v01-19-02" \ 
+    version="1.1-v01-19-02" \ 
     description="Docker image for EUTelescope framework (link with ilcinstall version)"
 
 # Place at the directory
